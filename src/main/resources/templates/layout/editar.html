@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>EDITAR ALUMNO</title>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <section th:fragment="editar">
+            <!-- el th:object=alumnos llama del controlador editar su parametro -->
+            <form th:action="@{/guardar}" th:object="${productos}" method="POST" class="was-validated">
+                <input type="hidden" name="idProducto" th:field="*{idProducto}"/>
+                <section th:replace="layout/botonesEditar :: botonesEditar"></section>
+                <div id="details">
+                    <dv class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>[[#{accion.editar}]]</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <!--el alumno.nombre se jala del properties-->
+                                        <!--el for=nombre se jala de la clase alumno-->
+                                        <div class="form-group">
+                                            <label for="descripcion">[[#{producto.descripcion}]]</label>
+                                            <input type="text" class="form-control" name="descripcion" required="true" th:field="*{descripcion}">                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="precio">[[#{producto.precio}]]</label>
+                                            <input type="text" class="form-control" name="precio" required="true" th:field="*{precio}">                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cantidad">[[#{producto.cantidad}]]</label>
+                                            <input type="text" class="form-control" name="cantidad" required="true" th:field="*{cantidad}">                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="marca">[[#{producto.marca}]]</label>
+                                            <input type="text" class="form-control" name="marca" required="true" th:field="*{marca}">                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dv>
+                </div>
+
+            </form>
+        </section>
+
+
+
+
+    </body>
+</html>

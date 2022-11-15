@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:fragment="head">
+        <title>ECOMMERCE</title>
+        <meta charset="UTF-8">
+            <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+            <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand" th:text="#{Plantilla.titulo}">PRODUCTOS</a>
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar">
+
+                            <li class="nav-item px-5">
+                                <a th:href="@{/}" class="nav-link active" th:text="#{barra.titulo}">Inicio</a>     
+                            </li>
+                           <li class="nav-item">
+                                <form method="POST" th:action="@{/logout}">
+
+                                    <a href="#" onclick="this.parentNode.submit();" class="nav-link">
+                                        <i class="fas fa-user-times" ></i> [[#{barra.salir}]]
+                                    </a>
+                                    <b style="color: white">User :</b> <span style="color: white" sec:authentication="name" >Usuario que hizo login</span>
+                                    <b style="color: white">Roles :</b> <span style="color: white" sec:authentication="principal.authorities" >Roles</span>
+                                    
+                                </form>
+
+
+                            </li>
+                        </ul>                    
+                    </div>
+                </div>
+            </nav>
+
+            <section id="main-header" class="py-2 bg-info text-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                <i class="fas fa-cog"></i> [[#{Plantilla.titulo}]]
+                            </h1>
+                        </div>
+                    </div>
+                </div>             
+            </section>
+
+
+        </header> 
+        
+
+    </body>
+
+</html>

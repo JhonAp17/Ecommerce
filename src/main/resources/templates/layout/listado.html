@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>lISTADO PRODUCTOS</title>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        
+
+        <section th:fragment="listado" id="productoss">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{producto.titulo-lista}]]</h4>
+                            </div>
+                            <div th:if="${productoss != null and !productoss.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr> 
+                                            <th>#</th>
+                                            <th th:text="#{producto.descripcion}">Mostrar nombre</th>
+                                            <th th:text="#{producto.precio}">Mostrar precio</th>
+                                            <th th:text="#{producto.cantidad}">Mostrar cantidad</th>
+                                            <th th:text="#{producto.marca}">MostrarMarca</th>
+                                            <th> </th>
+                                            <th> </th>
+                                            <th> </th>
+                                        </tr>
+                                    </thead> 
+                                    <tbody>
+                                        <tr th:each="producto, contador : ${productoss}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${producto.descripcion}]]</td>
+                                            <td>[[${producto.precio}]]</td>
+                                            <td>[[${producto.cantidad}]]</td>
+                                            <td>[[${producto.marca}]]</td> 
+
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${producto.idProducto}" class="btn btn-warning">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar/} + ${producto.idProducto}" class="btn btn-danger btn-block">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/comprar}" class="btn btn-success">
+                                                    <i class="bi bi-cart-check"></i> [[#{accion.comprar}]]
+                                                </a>
+                                            </td>
+                                            <!-- REVISAR ESTE QUERY ELIMINAR
+                                            <td>
+                                                <a th:href="@{/eliminar(idAlumno=${alumno.idAlumno})}" class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accionn.eliminar}]]
+                                                </a>
+                                            </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>                          
+                            </div>
+                            <div class="text-center p-2" th:if="${productoss == null or productoss.empty}">
+                                <span th:text="#{producto.lista-vacia}">Lista Vacia</span>                             
+                            </div> 
+                        </div>
+                    </div>
+                         
+                </div>
+            </div>
+
+
+        </section>
+
+
+
+    </body>
+</html>
